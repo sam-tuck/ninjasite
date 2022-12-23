@@ -7,7 +7,7 @@ import 'package:screensite/common.dart';
 
 class MyAppBar {
   static final List<String> _tabs = [
-    'translate',
+    'translated',
     // 'lists',
     // 'pep admin',
     // 'pep library',
