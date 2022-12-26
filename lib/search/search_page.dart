@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ import 'package:screensite/search/search_details.dart';
 import 'package:screensite/search/search_list.dart';
 import 'package:screensite/state/generic_state_notifier.dart';
 import 'package:screensite/drawer.dart';
+import 'package:http/http.dart' as http;
 
 final activeBatch =
     StateNotifierProvider<GenericStateNotifier<String?>, String?>(
@@ -68,6 +71,8 @@ class SearchPage extends ConsumerWidget {
                         //       .instance.currentUser!.uid,
                         // });
 
+                        fetchAlbum(searchCtrl.text);
+
                         FirebaseFirestore.instance.collection('phrase')
                             // .doc(FirebaseAuth
                             //     .instance.currentUser!.uid)
@@ -84,6 +89,23 @@ class SearchPage extends ConsumerWidget {
             ],
           )),
     );
+  }
+
+  dynamic fetchAlbum(String url) async {
+    print('fetching ${url}');
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      print(response.body);
+      return jsonDecode(response.body);
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      print('fail');
+      throw Exception('Failed to load album');
+    }
   }
 }
 
