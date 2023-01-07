@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:screensite/common.dart';
+import 'package:jsninja/common.dart';
 
 class EntityFilter extends Equatable {
   final DateTime start, end;

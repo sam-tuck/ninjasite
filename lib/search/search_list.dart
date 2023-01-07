@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:screensite/providers/firestore.dart';
-import 'package:screensite/search/search_list_item.dart';
-import 'package:screensite/state/generic_state_notifier.dart';
+import 'package:jsninja/providers/firestore.dart';
+import 'package:jsninja/search/search_list_item.dart';
+import 'package:jsninja/state/generic_state_notifier.dart';
 
 final sortStateNotifierProvider =
     StateNotifierProvider<GenericStateNotifier<String?>, String?>(

@@ -4,12 +4,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:screensite/app_bar.dart';
-import 'package:screensite/common.dart';
-import 'package:screensite/search/search_details.dart';
-import 'package:screensite/search/search_list.dart';
-import 'package:screensite/state/generic_state_notifier.dart';
-import 'package:screensite/drawer.dart';
+import 'package:jsninja/app_bar.dart';
+import 'package:jsninja/common.dart';
+import 'package:jsninja/search/search_details.dart';
+import 'package:jsninja/search/search_list.dart';
+import 'package:jsninja/state/generic_state_notifier.dart';
+import 'package:jsninja/drawer.dart';
 import 'package:http/http.dart' as http;
 
 final activeBatch =
@@ -73,7 +73,7 @@ class SearchPage extends ConsumerWidget {
 
                         fetchAlbum(searchCtrl.text);
 
-                        FirebaseFirestore.instance.collection('phrase')
+                        FirebaseFirestore.instance.collection('positionFetch')
                             // .doc(FirebaseAuth
                             //     .instance.currentUser!.uid)
                             // .collection('search')

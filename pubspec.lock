@@ -92,13 +92,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.16.0"
-  country_picker:
-    dependency: "direct main"
-    description:
-      name: country_picker
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.18"
   crypto:
     dependency: transitive
     description:
@@ -342,15 +335,6 @@ packages:
     dependency: "direct main"
     description:
       path: login
-      ref: HEAD
-      resolved-ref: "338cf547cb7f216b6ac9826561a7a910b927b059"
-      url: "https://github.com/amlcloud/flutter-lib.git"
-    source: git
-    version: "0.0.1"
-  logo:
-    dependency: "direct main"
-    description:
-      path: logo
       ref: HEAD
       resolved-ref: "338cf547cb7f216b6ac9826561a7a910b927b059"
       url: "https://github.com/amlcloud/flutter-lib.git"

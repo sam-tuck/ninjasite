@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:screensite/main.dart';
-import 'package:screensite/state/theme_state_notifier.dart';
-import 'package:screensite/common.dart';
+import 'package:jsninja/main.dart';
+import 'package:jsninja/state/theme_state_notifier.dart';
+import 'package:jsninja/common.dart';
 
 class MyAppBar {
   static final List<String> _tabs = [

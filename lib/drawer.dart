@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:screensite/search/search_page.dart';
-import 'package:screensite/lists/lists_page.dart';
+import 'package:jsninja/search/search_page.dart';
 
 class TheDrawer {
   static Widget buildDrawer(BuildContext context) {
@@ -41,7 +40,8 @@ class TheDrawer {
                 Navigator.of(context).pop();
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return ListsPage();
+                    return Text('hi');
+                    // return ListsPage();
                   },
                 ));
               }),

@@ -2,15 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:screensite/lists/lists_page.dart';
-import 'package:screensite/login_page.dart';
-import 'package:screensite/search/search_page.dart';
-import 'package:screensite/pep/pep_admin.dart';
-import 'package:screensite/pep/pep_library.dart';
-import 'package:screensite/adversemedia/adversemedia_page.dart';
-import 'package:screensite/state/generic_state_notifier.dart';
-import 'package:screensite/state/theme_state_notifier.dart';
-import 'package:screensite/theme.dart';
+import 'package:jsninja/login_page.dart';
+import 'package:jsninja/search/search_page.dart';
+import 'package:jsninja/state/generic_state_notifier.dart';
+import 'package:jsninja/state/theme_state_notifier.dart';
+import 'package:jsninja/theme.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -92,19 +88,20 @@ class TheAppState extends ConsumerState<TheApp> {
                       if (settings.name == '/' || settings.name == 'search') {
                         return PageRouteBuilder(
                             pageBuilder: (_, __, ___) => SearchPage());
-                      } else if (settings.name == 'lists') {
-                        return PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => ListsPage());
-                      } else if (settings.name == 'pep admin') {
-                        return PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => PepAdminPage());
-                      } else if (settings.name == 'pep library') {
-                        return PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => PepLibraryPage());
-                      } else if (settings.name == 'adverse media') {
-                        return PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => AdverseMediaPage());
                       } else {
+                        //  else if (settings.name == 'lists') {
+                        //   return PageRouteBuilder(
+                        //       pageBuilder: (_, __, ___) => ListsPage());
+                        // } else if (settings.name == 'pep admin') {
+                        //   return PageRouteBuilder(
+                        //       pageBuilder: (_, __, ___) => PepAdminPage());
+                        // } else if (settings.name == 'pep library') {
+                        //   return PageRouteBuilder(
+                        //       pageBuilder: (_, __, ___) => PepLibraryPage());
+                        // } else if (settings.name == 'adverse media') {
+                        //   return PageRouteBuilder(
+                        //       pageBuilder: (_, __, ___) => AdverseMediaPage());
+                        // } else {
                         throw 'no page to show';
                       }
                     },
