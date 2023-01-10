@@ -16,7 +16,7 @@ final activeBatch =
     StateNotifierProvider<GenericStateNotifier<String?>, String?>(
         (ref) => GenericStateNotifier<String?>(null));
 
-class SearchPage extends ConsumerWidget {
+class VacanciesPage extends ConsumerWidget {
   final TextEditingController searchCtrl = TextEditingController();
 
   @override
@@ -73,7 +73,7 @@ class SearchPage extends ConsumerWidget {
 
                         fetchAlbum(searchCtrl.text);
 
-                        FirebaseFirestore.instance.collection('positionFetch')
+                        FirebaseFirestore.instance.collection('vacancyFetch')
                             // .doc(FirebaseAuth
                             //     .instance.currentUser!.uid)
                             // .collection('search')

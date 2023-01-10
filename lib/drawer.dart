@@ -26,7 +26,7 @@ class TheDrawer {
                 Navigator.of(context).pop();
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return SearchPage();
+                    return VacanciesPage();
                   },
                 ));
               }),

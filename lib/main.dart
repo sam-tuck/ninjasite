@@ -28,7 +28,7 @@ class MainApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     bool isDarkTheme = ref.watch(themeStateNotifierProvider);
     return MaterialApp(
-      title: 'GK',
+      title: 'JOB SEARCH NINJA',
       themeMode: isDarkTheme ? ThemeMode.dark : ThemeMode.light,
       theme: lightTheme,
       darkTheme: darkTheme,
@@ -87,7 +87,7 @@ class TheAppState extends ConsumerState<TheApp> {
                       // print('onGenerateRoute: ${settings}');
                       if (settings.name == '/' || settings.name == 'search') {
                         return PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => SearchPage());
+                            pageBuilder: (_, __, ___) => VacanciesPage());
                       } else {
                         //  else if (settings.name == 'lists') {
                         //   return PageRouteBuilder(
