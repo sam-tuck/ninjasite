@@ -73,19 +73,19 @@ class VacanciesPage extends ConsumerWidget {
 
                         fetchAlbum(searchCtrl.text);
 
-                        FirebaseFirestore.instance.collection('vacancyFetch')
+                        FirebaseFirestore.instance.collection('vacancy')
                             // .doc(FirebaseAuth
                             //     .instance.currentUser!.uid)
                             // .collection('search')
                             .add({
-                          'text': searchCtrl.text,
+                          'url': searchCtrl.text,
                           'timeCreated': FieldValue.serverTimestamp(),
                           'author': FirebaseAuth.instance.currentUser!.uid,
                         });
                       })
                 ],
               ),
-              Expanded(child: SearchHistory()),
+              Expanded(child: VacanciesList()),
             ],
           )),
     );
