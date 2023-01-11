@@ -8,6 +8,8 @@ import 'package:jsninja/common.dart';
 class MyAppBar {
   static final List<String> _tabs = [
     'vacancies',
+    'resumes',
+    'cover letters',
     // 'lists',
     // 'pep admin',
     // 'pep library',
