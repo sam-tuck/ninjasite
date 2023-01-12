@@ -85,9 +85,18 @@ class TheAppState extends ConsumerState<TheApp> {
                   child: Navigator(
                     onGenerateRoute: (RouteSettings settings) {
                       // print('onGenerateRoute: ${settings}');
-                      if (settings.name == '/' || settings.name == 'search') {
+                      // if (settings.name == '/' || settings.name == 'search') {
+                      if (settings.name == '/' || settings.name == 'vacancies') {
                         return PageRouteBuilder(
                             pageBuilder: (_, __, ___) => VacanciesPage());
+                      }
+                      if (settings.name == 'resumes') {
+                        return PageRouteBuilder(
+                            pageBuilder: (_, __, ___) => ResumesPage());
+                      }
+                      if (settings.name == 'cover letters') {
+                        return PageRouteBuilder(
+                            pageBuilder: (_, __, ___) => CoverLettersPage());
                       } else {
                         //  else if (settings.name == 'lists') {
                         //   return PageRouteBuilder(
