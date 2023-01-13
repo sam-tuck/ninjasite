@@ -47,7 +47,11 @@ class VacancyItem extends ConsumerWidget {
                               title: Text('Job details'),
                               content: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text('Job details go here...')),
+                                  child: Text(
+                                    searchDoc
+                                        .data()!['positionDesc']
+                                        .join("\n"),
+                                  )),
                               actions: [
                                 TextButton(
                                     child: Text("Cancel"),
