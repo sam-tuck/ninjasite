@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jsninja/login_page.dart';
 import 'package:jsninja/search/search_page.dart';
+import 'package:jsninja/search/resume_page.dart';
+import 'package:jsninja/search/coverletter_page.dart';
 import 'package:jsninja/state/generic_state_notifier.dart';
 import 'package:jsninja/state/theme_state_notifier.dart';
 import 'package:jsninja/theme.dart';

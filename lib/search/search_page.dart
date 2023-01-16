@@ -109,69 +109,6 @@ class VacanciesPage extends ConsumerWidget {
   }
 }
 
-class ResumesPage extends ConsumerWidget {
-  final TextEditingController searchCtrl = TextEditingController();
-
-  ResumesPage({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: MyAppBar.getBar(context, ref),
-      drawer: (MediaQuery.of(context).size.width < WIDE_SCREEN_WIDTH)
-          ? TheDrawer.buildDrawer(context)
-          : null,
-      body: Container(
-          alignment: Alignment.center,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-             ElevatedButton(
-              onPressed: (){},
-              child: Text("Add Resume", style: Theme.of(context).textTheme.headline3),
-              ),
-              ListTile(
-                title: Text("Resume 1", style: Theme.of(context).textTheme.headline4),
-                subtitle: Text("Resume 2", style: Theme.of(context).textTheme.headline4),
-              ),
-            ],
-          )),
-    );
-  }
-}
-class CoverLettersPage extends ConsumerWidget {
-  final TextEditingController searchCtrl = TextEditingController();
-
-  CoverLettersPage({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: MyAppBar.getBar(context, ref),
-      drawer: (MediaQuery.of(context).size.width < WIDE_SCREEN_WIDTH)
-          ? TheDrawer.buildDrawer(context)
-          : null,
-      body: Container(
-          alignment: Alignment.center,
-          child: Column(
-            //mainAxisSize: MainAxisSize.max,
-            //mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-             ElevatedButton(
-              onPressed: (){},
-              child: Text("Add Cover Letter", style: Theme.of(context).textTheme.headline3),
-              ),
-              ListTile(
-                title: Text("Cover Letter 1", style: Theme.of(context).textTheme.headline4),
-                subtitle: Text("Cover Letter 2", style: Theme.of(context).textTheme.headline4),
-              ),
-            ],
-          )),
-    );
-  }
-}
-
 // buildAddBatchButton(BuildContext context, WidgetRef ref) {
 //   TextEditingController id_inp = TextEditingController();
 //   TextEditingController name_inp = TextEditingController();
