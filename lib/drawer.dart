@@ -40,6 +40,7 @@ class TheDrawer {
                 Navigator.of(context).pop();
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
+                    //return ResumesPage();
                     return Text('hi');
                     // return ListsPage();
                   },
