@@ -16,24 +16,11 @@ class UserVacanciesList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) => ListView(
       padding: EdgeInsets.zero,
       shrinkWrap: true,
-      children: ref.watch(
-          // filteredColSP(QueryParams(
-          //   path: 'vacancy',
-          //   orderBy: 'timeCreated',
-          //   isOrderDesc: true,
-          //   limit: 100))
-          colSP('user/$uid/vacancy')).when(
+      children: ref.watch(colSP('user/$uid/vacancy')).when(
           loading: () => [Container()],
           error: (e, s) => [ErrorWidget(e)],
           data: (data) {
-            //print('vacancies found: ${data.docs.first.id}');
-            // if (data.size == 0) {
-            // } else {
-            //   return data.docs
-            //       .map((e) => UserVacancyItem(key: Key(e.id), e.reference))
-            //       .toList();
-            // }
-
+            //print('vacancies found: ${data.docs.first.id}')
             return data.docs
                 .map((e) => UserVacancyItem(key: Key(e.id), e.reference))
                 .toList();
