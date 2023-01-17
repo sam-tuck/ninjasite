@@ -8,6 +8,7 @@ import 'package:jsninja/state/generic_state_notifier.dart';
 import 'package:jsninja/state/theme_state_notifier.dart';
 import 'package:jsninja/theme.dart';
 import 'firebase_options.dart';
+import 'package:jsninja/vacancies/user_vacancies.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -87,7 +88,8 @@ class TheAppState extends ConsumerState<TheApp> {
                       // print('onGenerateRoute: ${settings}');
                       if (settings.name == '/' || settings.name == 'search') {
                         return PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => VacanciesPage());
+                            pageBuilder: (_, __, ___) => UserVacancies());
+                        //pageBuilder: (_, __, ___) => VacanciesPage());
                       } else {
                         //  else if (settings.name == 'lists') {
                         //   return PageRouteBuilder(
