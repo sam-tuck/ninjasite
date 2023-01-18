@@ -2,10 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jsninja/choose_userview.dart';
 import 'package:jsninja/login_page.dart';
-import 'package:jsninja/search/search_page.dart';
-import 'package:jsninja/search/resume_page.dart';
-import 'package:jsninja/search/coverletter_page.dart';
 import 'package:jsninja/state/generic_state_notifier.dart';
 import 'package:jsninja/state/theme_state_notifier.dart';
 import 'package:jsninja/theme.dart';
@@ -81,42 +79,7 @@ class TheAppState extends ConsumerState<TheApp> {
       return Scaffold(
           body: ref.watch(isLoggedIn) == false
               ? LoginPage()
-              : DefaultTabController(
-                  initialIndex: 0,
-                  length: 5,
-                  child: Navigator(
-                    onGenerateRoute: (RouteSettings settings) {
-                      // print('onGenerateRoute: ${settings}');
-                      // if (settings.name == '/' || settings.name == 'search') {
-                      if (settings.name == '/' || settings.name == 'vacancies') {
-                        return PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => VacanciesPage());
-                      }
-                      if (settings.name == 'resumes') {
-                        return PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => ResumesPage());
-                      }
-                      if (settings.name == 'cover letters') {
-                        return PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => CoverLettersPage());
-                      } else {
-                        //  else if (settings.name == 'lists') {
-                        //   return PageRouteBuilder(
-                        //       pageBuilder: (_, __, ___) => ListsPage());
-                        // } else if (settings.name == 'pep admin') {
-                        //   return PageRouteBuilder(
-                        //       pageBuilder: (_, __, ___) => PepAdminPage());
-                        // } else if (settings.name == 'pep library') {
-                        //   return PageRouteBuilder(
-                        //       pageBuilder: (_, __, ___) => PepLibraryPage());
-                        // } else if (settings.name == 'adverse media') {
-                        //   return PageRouteBuilder(
-                        //       pageBuilder: (_, __, ___) => AdverseMediaPage());
-                        // } else {
-                        throw 'no page to show';
-                      }
-                    },
-                  )));
+              : ChooseUserViewWidget());
     }
   }
 }
