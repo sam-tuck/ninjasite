@@ -6,28 +6,33 @@ import 'package:jsninja/app_bar.dart';
 import 'package:jsninja/drawer.dart';
 import 'package:jsninja/common.dart';
 
+import 'admin/users_page.dart';
+
 //Accessed by clicking workaround button on login page for time being
 class AdminViewWidget extends ConsumerWidget {
   const AdminViewWidget({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: MyAppBar.getBar(context, ref),
-      drawer: (MediaQuery.of(context).size.width < WIDE_SCREEN_WIDTH)
-          ? TheDrawer.buildDrawer(context)
-          : null,
-      body: Container(
-          margin: EdgeInsets.all(20),
-          alignment: Alignment.center,
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(child: UserList()),
-              Expanded(child: UserDetails(ref.watch(activeUser)))
-            ],
-          )),
-    );
-  }
+  Widget build(BuildContext context, WidgetRef ref) => DefaultTabController(
+      initialIndex: 0,
+      length: 3,
+      child: Navigator(
+        onGenerateRoute: (RouteSettings settings) {
+          // print('onGenerateRoute: ${settings}');
+          // if (settings.name == '/' || settings.name == 'search') {
+          if (settings.name == '/' || settings.name == 'clients') {
+            return PageRouteBuilder(pageBuilder: (_, __, ___) => UsersPage());
+          }
+          // if (settings.name == 'resumes') {
+          //   return PageRouteBuilder(pageBuilder: (_, __, ___) => ResumesPage());
+          // }
+          // if (settings.name == 'cover letters') {
+          //   return PageRouteBuilder(
+          //       pageBuilder: (_, __, ___) => CoverLettersPage());
+          // }
+          else {
+            throw 'no page to show';
+          }
+        },
+      ));
 }
