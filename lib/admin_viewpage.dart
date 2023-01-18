@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jsninja/admin/user_details.dart';
+import 'package:jsninja/admin/user_list.dart';
 import 'package:jsninja/app_bar.dart';
 import 'package:jsninja/drawer.dart';
 import 'package:jsninja/common.dart';
@@ -18,14 +20,12 @@ class AdminViewWidget extends ConsumerWidget {
       body: Container(
           margin: EdgeInsets.all(20),
           alignment: Alignment.center,
-          child: Column(
+          child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-             ElevatedButton(
-              onPressed: (){},
-              child: Text("Admin Button", style: Theme.of(context).textTheme.headline3),
-              ),
+              Expanded(child: UserList()),
+              Expanded(child: UserDetails(ref.watch(activeUser)))
             ],
           )),
     );
