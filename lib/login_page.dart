@@ -9,21 +9,7 @@ class LoginPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      //Temporary AppBar for workaround to admin page
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.account_box),
-            padding: EdgeInsets.only(right: 40.0),
-            tooltip: 'Admin Login',
-            onPressed: () {
-              Navigator.push(context,
-              MaterialPageRoute(builder: (context) => AdminViewWidget()),
-              );
-            },
-          )
-        ],
-      ),
+      
         body: LoginScreen(
       screenTitle: "Log in",
       loginOptions: {
