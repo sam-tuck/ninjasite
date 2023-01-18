@@ -8,6 +8,7 @@ import 'package:jsninja/state/generic_state_notifier.dart';
 import 'package:jsninja/state/theme_state_notifier.dart';
 import 'package:jsninja/theme.dart';
 import 'firebase_options.dart';
+import 'package:jsninja/vacancies/user_vacancies.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
