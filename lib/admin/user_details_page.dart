@@ -36,7 +36,7 @@ class UserDetailsPage extends ConsumerWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text('user details')
+              UserDetails(uid)
               // Expanded(child: UserList()),
               // Expanded(child: UserDetails(ref.watch(activeUser)))
             ],
