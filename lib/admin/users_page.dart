@@ -12,22 +12,26 @@ class UsersPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AdminAppBar.getBar(context, ref),
-      drawer: (MediaQuery.of(context).size.width < WIDE_SCREEN_WIDTH)
-          ? TheDrawer.buildDrawer(context)
-          : null,
-      body: Container(
-          margin: EdgeInsets.all(20),
-          alignment: Alignment.center,
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(child: UserList()),
-              Expanded(child: UserDetails(ref.watch(activeUser)))
-            ],
-          )),
-    );
+    return WillPopScope(
+        onWillPop: () async {
+          return false;
+        },
+        child: Scaffold(
+          appBar: AdminAppBar.getBar(context, ref),
+          drawer: (MediaQuery.of(context).size.width < WIDE_SCREEN_WIDTH)
+              ? TheDrawer.buildDrawer(context)
+              : null,
+          body: Container(
+              margin: EdgeInsets.all(20),
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(child: UserList()),
+                  Expanded(child: UserDetails(ref.watch(activeUser)))
+                ],
+              )),
+        ));
   }
 }

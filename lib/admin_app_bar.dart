@@ -18,18 +18,27 @@ class AdminAppBar {
 
   static PreferredSizeWidget getBar(BuildContext context, WidgetRef ref) {
     return AppBar(
-      automaticallyImplyLeading:
-          (MediaQuery.of(context).size.width < WIDE_SCREEN_WIDTH)
-              ? true
-              : false,
-      leadingWidth:
-          (MediaQuery.of(context).size.width < WIDE_SCREEN_WIDTH) ? null : 100,
-      leading: (MediaQuery.of(context).size.width < WIDE_SCREEN_WIDTH)
-          ? null
-          : Padding(
-              padding: EdgeInsets.all(10),
-              child: Text(''),
-            ),
+      // automaticallyImplyLeading:
+      //     (MediaQuery.of(context).size.width < WIDE_SCREEN_WIDTH)
+      //         ? true
+      //         : false,
+      // leadingWidth:
+      //     (MediaQuery.of(context).size.width < WIDE_SCREEN_WIDTH) ? null : 100,
+      // leading: BackButton(onPressed: () => Navigator.of(context).pop()),
+      // IconButton(
+      //     icon:
+
+      //     Icon(Icons.navigate_before),
+      //     onPressed: () => Navigator.of(context).pop()),
+      //  (MediaQuery.of(context).size.width < WIDE_SCREEN_WIDTH)
+      //     ? null
+      //     :
+
+      // Padding(
+      //     padding: EdgeInsets.all(10),
+      //     child: Text(''),
+      //   )
+
       title: (MediaQuery.of(context).size.width < WIDE_SCREEN_WIDTH)
           ? null
           : Align(
@@ -58,16 +67,7 @@ class AdminAppBar {
                       Navigator.of(context).pushNamed(_tabs[index]);
                     },
                   ))),
-      actions: [
-        ThemeIconButton(),
-        IconButton(
-            onPressed: () {
-              ref.read(isLoggedIn.notifier).value = false;
-              FirebaseAuth.instance.signOut();
-              // print("Signed out");
-            },
-            icon: Icon(Icons.exit_to_app))
-      ],
+      actions: [ThemeIconButton(), SignOutButton()],
     );
   }
 }
@@ -85,4 +85,14 @@ class ThemeIconButton extends ConsumerWidget {
             ? Icons.nightlight
             : Icons.nightlight_outlined));
   }
+}
+
+class SignOutButton extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => IconButton(
+      onPressed: () {
+        ref.read(isLoggedIn.notifier).value = false;
+        FirebaseAuth.instance.signOut();
+      },
+      icon: Icon(Icons.exit_to_app));
 }
