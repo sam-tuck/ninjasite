@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jsninja/app_bar.dart';
 import 'package:jsninja/common.dart';
-import 'package:jsninja/search/vacancy_list.dart';
 //import 'package:jsninja/state/generic_state_notifier.dart';
 import 'package:jsninja/drawer.dart';
 //import 'package:http/http.dart' as http;
@@ -30,13 +29,16 @@ class ResumesPage extends ConsumerWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-             ElevatedButton(
-              onPressed: (){},
-              child: Text("Add Resume", style: Theme.of(context).textTheme.headline3),
+              ElevatedButton(
+                onPressed: () {},
+                child: Text("Add Resume",
+                    style: Theme.of(context).textTheme.headline3),
               ),
               ListTile(
-                title: Text("Resume 1", style: Theme.of(context).textTheme.headline4),
-                subtitle: Text("Resume 2", style: Theme.of(context).textTheme.headline4),
+                title: Text("Resume 1",
+                    style: Theme.of(context).textTheme.headline4),
+                subtitle: Text("Resume 2",
+                    style: Theme.of(context).textTheme.headline4),
               ),
             ],
           )),
