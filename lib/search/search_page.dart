@@ -12,6 +12,8 @@ import 'package:jsninja/state/generic_state_notifier.dart';
 import 'package:jsninja/drawer.dart';
 import 'package:http/http.dart' as http;
 
+import '../vacancies/user_vacancy_search_list.dart';
+
 final activeBatch =
     StateNotifierProvider<GenericStateNotifier<String?>, String?>(
         (ref) => GenericStateNotifier<String?>(null));
@@ -57,10 +59,13 @@ class VacanciesPage extends ConsumerWidget {
                             .get();
                         if (col.size > 0) {
                           //... do error message here
+                          print('already exists');
                           return;
                         }
 
-                        FirebaseFirestore.instance.collection('vacancy')
+                        FirebaseFirestore.instance
+                            .collection(
+                                'user/${FirebaseAuth.instance.currentUser!.uid}/vacancy')
                             // .doc(FirebaseAuth
                             //     .instance.currentUser!.uid)
                             // .collection('search')
@@ -72,7 +77,7 @@ class VacanciesPage extends ConsumerWidget {
                       })
                 ],
               ),
-              Expanded(child: VacanciesList()),
+              Expanded(child: UserVacanciesList()),
             ],
           )),
     );
