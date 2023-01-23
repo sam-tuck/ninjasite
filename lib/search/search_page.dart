@@ -50,28 +50,15 @@ class VacanciesPage extends ConsumerWidget {
                       onPressed: () async {
                         if (searchCtrl.text.isEmpty) return;
 
-                        // var url = Uri.parse(
-                        //     'https://screen-od6zwjoy2a-an.a.run.app/?name=${searchCtrl.text.toLowerCase()}');
-                        // var response = await http.post(url, body: {
-                        //   // 'name': 'doodle',
-                        //   // 'color': 'blue'
-                        // });
-                        // print(
-                        //     'Response status: ${response.statusCode}');
-                        // print('Response body: ${response.body}');
-
-                        // FirebaseFirestore.instance
-                        //     .collection('search')
-                        //     .doc(searchCtrl.text)
-                        //     .set({
-                        //   'target': searchCtrl.text,
-                        //   'timeCreated':
-                        //       FieldValue.serverTimestamp(),
-                        //   'author': FirebaseAuth
-                        //       .instance.currentUser!.uid,
-                        // });
-
-                        fetchAlbum(searchCtrl.text);
+                        var col = await FirebaseFirestore.instance
+                            .collection(
+                                'user/${FirebaseAuth.instance.currentUser!.uid}/vacancy')
+                            .where('url', isEqualTo: searchCtrl.text)
+                            .get();
+                        if (col.size > 0) {
+                          //... do error message here
+                          return;
+                        }
 
                         FirebaseFirestore.instance.collection('vacancy')
                             // .doc(FirebaseAuth
@@ -89,23 +76,6 @@ class VacanciesPage extends ConsumerWidget {
             ],
           )),
     );
-  }
-
-  dynamic fetchAlbum(String url) async {
-    print('fetching ${url}');
-    final response = await http.get(Uri.parse(url));
-
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      print(response.body);
-      return jsonDecode(response.body);
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      print('fail');
-      throw Exception('Failed to load album');
-    }
   }
 }
 
