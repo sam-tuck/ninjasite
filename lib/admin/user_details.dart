@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jsninja/admin/user_resume_list.dart';
 import 'package:jsninja/providers/firestore.dart';
 import 'package:jsninja/search/search_results.dart';
 import 'package:jsninja/state/generic_state_notifier.dart';
@@ -60,8 +61,7 @@ class UserDetails extends ConsumerWidget {
                     Expanded(
                         flex: 5,
                         child: SingleChildScrollView(
-                          child: Text(
-                              'User Resumes List Widget goes here...'), // Replace with UserResumeListWidget(userDoc.id))),
+                          child: UserResumeListWidget(userDoc.id),
                         )),
                     VerticalDivider(),
                     Expanded(
