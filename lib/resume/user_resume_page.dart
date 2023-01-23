@@ -9,7 +9,7 @@ import 'package:jsninja/common.dart';
 import 'package:jsninja/state/generic_state_notifier.dart';
 import 'package:jsninja/drawer.dart';
 import 'package:http/http.dart' as http;
-import 'package:jsninja/resume/resumeList.dart';
+import 'package:jsninja/resume/resume_list.dart';
 
 final activeResumeBatch =
     StateNotifierProvider<GenericStateNotifier<String?>, String?>(
@@ -19,7 +19,7 @@ final firestoreInstance = FirebaseFirestore.instance;
 final TextEditingController jobTitlechCtrl = TextEditingController();
 TextEditingController resumeController = TextEditingController();
 
-class UseerResumePage extends ConsumerWidget {
+class UserResumePage extends ConsumerWidget {
   String uid = FirebaseAuth.instance.currentUser!.uid;
 
   @override
@@ -116,21 +116,6 @@ class UseerResumePage extends ConsumerWidget {
                                 ],
                               );
                             });
-
-                        // if (jobTitlechCtrl.text.isEmpty) return;
-                        // print(uid);
-                        // //fetchAlbum(searchCtrl.text);
-                        // firestoreInstance
-                        //     .collection("user")
-                        //     .doc(uid)
-                        //     .collection("resume")
-                        //     .add({
-                        //   'jobTitle': jobTitlechCtrl.text,
-                        //   'resume': resumeController.text.toString(),
-                        //   'timeCreated': FieldValue.serverTimestamp(),
-                        //   'author': FirebaseAuth.instance.currentUser!.uid,
-                        // });
-                        // jobTitlechCtrl.clear();
                       })
                 ],
               ),
@@ -139,22 +124,5 @@ class UseerResumePage extends ConsumerWidget {
             ],
           )),
     );
-  }
-
-  dynamic fetchAlbum(String url) async {
-    print('fetching ${url}');
-    final response = await http.get(Uri.parse(url));
-
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      print(response.body);
-      return jsonDecode(response.body);
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      print('fail');
-      throw Exception('Failed to load album');
-    }
   }
 }

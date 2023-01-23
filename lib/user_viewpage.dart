@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jsninja/resume/userResumePage.dart';
+import 'package:jsninja/resume/user_resume_page.dart';
 import 'package:jsninja/search/search_page.dart';
 import 'package:jsninja/search/resume_page.dart';
 import 'package:jsninja/search/coverletter_page.dart';
@@ -22,7 +22,7 @@ class UserViewWidget extends StatelessWidget {
             }
             if (settings.name == 'resumes') {
               return PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => UseerResumePage());
+                  pageBuilder: (_, __, ___) => UserResumePage());
             }
             if (settings.name == 'cover letters') {
               return PageRouteBuilder(

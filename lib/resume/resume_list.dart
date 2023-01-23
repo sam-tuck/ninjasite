@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jsninja/providers/firestore.dart';
 import 'package:jsninja/state/generic_state_notifier.dart';
-import 'package:jsninja/resume/resumeTile.dart';
+import 'package:jsninja/resume/resume_tile.dart';
 
 final activeResumeBatch =
     StateNotifierProvider<GenericStateNotifier<String?>, String?>(
