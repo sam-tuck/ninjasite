@@ -6,10 +6,7 @@ import 'package:jsninja/providers/firestore.dart';
 import 'package:jsninja/search/search_results.dart';
 import 'package:jsninja/state/generic_state_notifier.dart';
 
-import 'package:jsninja/search/vacancy_list.dart';
-
 import '../vacancies/user_vacancy_search_list.dart';
-import '../vacancies/user_vacancy_search_list_item.dart';
 
 final activeUser =
     StateNotifierProvider<GenericStateNotifier<String?>, String?>(
@@ -53,15 +50,17 @@ class UserDetails extends ConsumerWidget {
                         height: MediaQuery.of(context).size.height - 180,
                         // child: Text(
                         //     'User Vacancy List Widget goes here'), // Replace with UserVacancyListWidget(userDoc.id)
-                        //child: VacanciesList(userDoc.id),
-                        child: VacanciesList(),
+                      child: UserVacanciesList(userDoc.id),
+                      // child: UserVacancyItem(key: Key(userDoc.id), userDoc.reference),
                       ),
                     ),
                     VerticalDivider(),
                     Expanded(
                         flex: 5,
                         child: SingleChildScrollView(
-                          child: UserResumeListWidget(userDoc.id),
+                          child: Text(
+                              'User Resume List Widget goes here'),
+                          // child: UserResumeListWidget(userDoc.id),
                         )),
                     VerticalDivider(),
                     Expanded(
