@@ -58,7 +58,22 @@ class VacanciesPage extends ConsumerWidget {
                             .where('url', isEqualTo: searchCtrl.text)
                             .get();
                         if (col.size > 0) {
-                          //... do error message here
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  content:
+                                      Text('Job has already been applied for.'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('OK'),
+                                    )
+                                  ],
+                                );
+                              });
                           print('already exists');
                           return;
                         }
