@@ -32,7 +32,7 @@ class UserVacancyItem extends ConsumerWidget {
                       Flexible(
                           flex: 1,
                           child: Text(
-                            (searchDoc.data()!['url'] ?? ''),
+                            (searchDoc.data()!['positionTitle'] ?? ''),
                             style: Theme.of(context).textTheme.headline3,
                           )),
                       Flexible(flex: 1, child: Text('Applying...')),
@@ -50,7 +50,7 @@ class UserVacancyItem extends ConsumerWidget {
                               content: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    searchDoc.data()!['url'].join("\n"),
+                                    searchDoc.data()!['positionDesc'].join("\n"),
                                   )),
                               actions: [
                                 TextButton(

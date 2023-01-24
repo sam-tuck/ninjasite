@@ -9,9 +9,13 @@ final sortStateNotifierProvider =
     StateNotifierProvider<GenericStateNotifier<String?>, String?>(
         (ref) => GenericStateNotifier<String?>(null));
 
-String uid = FirebaseAuth.instance.currentUser!.uid;
+// String uid = FirebaseAuth.instance.currentUser!.uid;
 
 class UserVacanciesList extends ConsumerWidget {
+
+  String ? uid;
+  UserVacanciesList(this.uid, {super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) => ListView(
       padding: EdgeInsets.zero,

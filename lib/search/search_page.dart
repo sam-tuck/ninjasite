@@ -20,7 +20,7 @@ final activeBatch =
 
 class VacanciesPage extends ConsumerWidget {
   final TextEditingController searchCtrl = TextEditingController();
-
+  String uid = FirebaseAuth.instance.currentUser!.uid;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -77,7 +77,7 @@ class VacanciesPage extends ConsumerWidget {
                       })
                 ],
               ),
-              Expanded(child: UserVacanciesList()),
+              Expanded(child: UserVacanciesList(uid)),
             ],
           )),
     );
