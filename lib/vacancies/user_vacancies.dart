@@ -65,7 +65,7 @@ class UserVacancies extends ConsumerWidget {
                       })
                 ],
               ),
-              Expanded(child: UserVacanciesList()),
+              Expanded(child: UserVacanciesList(uid)),
             ],
           )),
     );
