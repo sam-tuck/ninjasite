@@ -63,7 +63,7 @@ class VacanciesPage extends ConsumerWidget {
                               builder: (context) {
                                 return AlertDialog(
                                   content:
-                                      Text('Job has already been applied for.'),
+                                      Text('This job has already been added.'),
                                   actions: [
                                     TextButton(
                                       onPressed: () {
