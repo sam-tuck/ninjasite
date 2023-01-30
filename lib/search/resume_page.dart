@@ -1,9 +1,10 @@
 //import 'dart:convert';
 
-//import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart';
 import 'package:jsninja/app_bar.dart';
 import 'package:jsninja/common.dart';
 //import 'package:jsninja/state/generic_state_notifier.dart';
@@ -32,6 +33,18 @@ class ResumesPage extends ConsumerWidget {
               ElevatedButton(
                 onPressed: () {},
                 child: Text("Add Resume",
+                    style: Theme.of(context).textTheme.headline3),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  final docref = FirebaseFirestore.instance
+                      .collection(
+                          'user/${FirebaseAuth.instance.currentUser!.uid}/vacancy')
+                      .doc();
+                  final remove = <String, dynamic>{"": FieldValue.delete()};
+                  docref.update(remove);
+                },
+                child: Text("Delete Resume",
                     style: Theme.of(context).textTheme.headline3),
               ),
               ListTile(
