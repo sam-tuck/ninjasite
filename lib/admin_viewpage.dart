@@ -40,7 +40,7 @@ class AdminViewWidget extends ConsumerWidget {
           } else if (settings.name == UserDetailsPage.routeName) {
             return PageRouteBuilder(pageBuilder: (_, __, ___) {
               //print('args: ${ModalRoute.of(context)!.settings}');
-              final args = settings.arguments as ScreenArguments;
+              final args = settings.arguments as PageArguments;
 
               // final args =
               //     ModalRoute.of(context)!.settings.arguments as ScreenArguments;
@@ -62,9 +62,9 @@ class AdminViewWidget extends ConsumerWidget {
       ));
 }
 
-class ScreenArguments {
+class PageArguments {
   final String title;
   final String message;
 
-  ScreenArguments(this.title, this.message);
+  PageArguments(this.title, this.message);
 }
