@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:jsninja/providers/firestore.dart';
 import 'package:jsninja/state/generic_state_notifier.dart';
 import 'package:jsninja/vacancies/user_vacancy_search_list_item.dart';
@@ -12,8 +13,7 @@ final sortStateNotifierProvider =
 // String uid = FirebaseAuth.instance.currentUser!.uid;
 
 class UserVacanciesList extends ConsumerWidget {
-
-  String ? uid;
+  String? uid;
   UserVacanciesList(this.uid, {super.key});
 
   @override
@@ -23,10 +23,23 @@ class UserVacanciesList extends ConsumerWidget {
       children: ref.watch(colSP('user/$uid/vacancy')).when(
           loading: () => [Container()],
           error: (e, s) => [ErrorWidget(e)],
-          data: (data) {
-            //print('vacancies found: ${data.docs.first.id}')
-            return data.docs
-                .map((e) => UserVacancyItem(key: Key(e.id), e.reference))
-                .toList();
-          }));
+          // more detailed version:
+          // data: (data) {
+          //   var arr = data.docs;
+          //   arr.sort((a, b) => Jiffy(a.data()['timeCreated'].toDate())
+          //           .isAfter(b.data()['timeCreated'].toDate())
+          //       ? -1
+          //       : 1);
+          //   return (arr)
+          //       .map((e) => UserVacancyItem(key: Key(e.id), e.reference))
+          //       .toList();
+          // }));
+          // more concise version:
+          data: (data) => (data.docs
+                ..sort((a, b) => Jiffy(a.data()['timeCreated'].toDate())
+                        .isAfter(b.data()['timeCreated'].toDate())
+                    ? -1
+                    : 1))
+              .map((e) => UserVacancyItem(key: Key(e.id), e.reference))
+              .toList()));
 }

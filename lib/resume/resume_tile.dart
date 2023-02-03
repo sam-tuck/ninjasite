@@ -4,10 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jsninja/providers/firestore.dart';
+import 'package:jsninja/resume/user_resume_page.dart';
 
 class ResumeTile extends ConsumerWidget {
   final DocumentReference searchRef;
-  final TextEditingController ctrl = TextEditingController();
 
   ResumeTile(this.searchRef, {Key? key}) : super(key: key);
 
@@ -24,7 +24,6 @@ class ResumeTile extends ConsumerWidget {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      //Flexible(flex: 1, child: Text('vac ')),
                       Flexible(
                         flex: 1,
                         child: Text((searchDoc.data()!['jobTitle'] ?? ''),
@@ -32,7 +31,23 @@ class ResumeTile extends ConsumerWidget {
                       ),
                     ],
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    ref
+                        .read(resumeIdProvider.notifier)
+                        .update((state) => searchDoc.reference.id);
+
+                    ref
+                        .read(jobTitleProvider.notifier)
+                        .update((state) => searchDoc.data()!['jobTitle']);
+
+                    ref
+                        .read(resumeProvider.notifier)
+                        .update((state) => searchDoc.data()!['resume']);
+
+                    ref
+                        .read(resumeDescriptionProvider.notifier)
+                        .update((state) => searchDoc.data()!['description']);
+                  },
                 )
               ],
             )));

@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jsninja/providers/firestore.dart';
 import 'package:jsninja/search/search_page.dart';
+import 'package:jsninja/vacancies/user_vacancy_details.dart';
 
+import '../admin_viewpage.dart';
 import '../controls/doc_field_text_edit.dart';
 
 class UserVacancyItem extends ConsumerWidget {
@@ -50,7 +52,9 @@ class UserVacancyItem extends ConsumerWidget {
                               content: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    searchDoc.data()!['positionDesc'].join("\n"),
+                                    searchDoc
+                                        .data()!['positionDesc']
+                                        .join("\n"),
                                   )),
                               actions: [
                                 TextButton(
@@ -104,7 +108,14 @@ class UserVacancyItem extends ConsumerWidget {
                   //   //     Icon(Icons.delete))
                   // ]),
                   onTap: () {
-                    ref.read(activeBatch.notifier).value = searchRef.id;
+                    Navigator.pushNamed(
+                      context,
+                      UserVacancyDetailsPage.routeName,
+                      arguments: PageArguments(
+                        searchDoc.id,
+                        'This message is extracted in the build method.',
+                      ),
+                    );
                   },
                 )
               ],

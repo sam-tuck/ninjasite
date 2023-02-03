@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:jsninja/questions/questions_page.dart';
 import 'package:jsninja/resume/user_resume_page.dart';
 import 'package:jsninja/search/search_page.dart';
 import 'package:jsninja/search/resume_page.dart';
 import 'package:jsninja/search/coverletter_page.dart';
+import 'package:jsninja/vacancies/user_vacancy_details.dart';
+
+import 'admin_viewpage.dart';
 
 class UserViewWidget extends StatelessWidget {
   const UserViewWidget({super.key});
@@ -11,7 +15,7 @@ class UserViewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
         initialIndex: 0,
-        length: 3,
+        length: 4,
         child: Navigator(
           onGenerateRoute: (RouteSettings settings) {
             // print('onGenerateRoute: ${settings}');
@@ -28,20 +32,21 @@ class UserViewWidget extends StatelessWidget {
               return PageRouteBuilder(
                   pageBuilder: (_, __, ___) => CoverLettersPage());
             } else {
-              //  else if (settings.name == 'lists') {
-              //   return PageRouteBuilder(
-              //       pageBuilder: (_, __, ___) => ListsPage());
-              // } else if (settings.name == 'pep admin') {
-              //   return PageRouteBuilder(
-              //       pageBuilder: (_, __, ___) => PepAdminPage());
-              // } else if (settings.name == 'pep library') {
-              //   return PageRouteBuilder(
-              //       pageBuilder: (_, __, ___) => PepLibraryPage());
-              // } else if (settings.name == 'adverse media') {
-              //   return PageRouteBuilder(
-              //       pageBuilder: (_, __, ___) => AdverseMediaPage());
-              // } else {
-              throw 'no page to show';
+              if (settings.name == 'answers') {
+                return PageRouteBuilder(
+                    pageBuilder: (_, __, ___) => QuestionsPage());
+              } else if (settings.name == UserVacancyDetailsPage.routeName) {
+                return PageRouteBuilder(pageBuilder: (_, __, ___) {
+                  //print('args: ${ModalRoute.of(context)!.settings}');
+                  final args = settings.arguments as PageArguments;
+
+                  // final args =
+                  //     ModalRoute.of(context)!.settings.arguments as ScreenArguments;
+                  // print('args: ${args}');
+                  return UserVacancyDetailsPage(args.title);
+                });
+              } else
+                throw 'no page to show';
             }
           },
         ));

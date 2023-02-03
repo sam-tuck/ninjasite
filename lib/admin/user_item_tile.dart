@@ -112,7 +112,7 @@ class UserItemTile extends ConsumerWidget {
                     Navigator.pushNamed(
                       context,
                       UserDetailsPage.routeName,
-                      arguments: ScreenArguments(
+                      arguments: PageArguments(
                         searchDoc.id,
                         'This message is extracted in the build method.',
                       ),

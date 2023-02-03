@@ -10,6 +10,7 @@ class MyAppBar {
     'vacancies',
     'resumes',
     'cover letters',
+    'answers'
     // 'lists',
     // 'pep admin',
     // 'pep library',
