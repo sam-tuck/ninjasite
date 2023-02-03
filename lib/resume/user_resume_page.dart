@@ -116,7 +116,45 @@ class UserResumePage extends ConsumerWidget {
                                 ],
                               );
                             });
-                      })
+                      }),
+                  ElevatedButton(
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              content: TextField(
+                                onChanged: (value) {},
+                                decoration: InputDecoration(
+                                    hintText: "Enter name here."),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    final docref = FirebaseFirestore.instance
+                                        .collection('user/resume')
+                                        .doc();
+                                    final remove = <String, dynamic>{
+                                      "": FieldValue.delete()
+                                    };
+                                    docref.update(remove);
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text('Confirm'),
+                                ),
+                              ],
+                            );
+                          });
+                    },
+                    child: Text("Delete Resume",
+                        style: Theme.of(context).textTheme.headline3),
+                  )
                 ],
               ),
 
