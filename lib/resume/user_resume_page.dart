@@ -5,38 +5,34 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jsninja/app_bar.dart';
 import 'package:jsninja/common.dart';
 import 'package:jsninja/resume/resume.dart';
+import 'package:jsninja/resume/resume_details.dart';
 import 'package:jsninja/state/generic_state_notifier.dart';
 import 'package:jsninja/drawer.dart';
 import 'package:http/http.dart' as http;
 import 'package:jsninja/resume/resume_list.dart';
 
-final resumeIdProvider = StateProvider<String?>((ref) => null);
-final jobTitleProvider = StateProvider<String?>((ref) => null);
-final resumeProvider = StateProvider<String?>((ref) => null);
-final resumeDescriptionProvider = StateProvider<String?>((ref) => null);
+// final resumeIdProvider = StateProvider<String?>((ref) => null);
+// final jobTitleProvider = StateProvider<String?>((ref) => null);
+//final resumeSNP = StateProvider<Map<String, dynamic>?>((ref) => null);
+// final resumeDescriptionProvider = StateProvider<String?>((ref) => null);
+final resumeSNP = StateNotifierProvider<
+        GenericStateNotifier<Map<String, dynamic>?>, Map<String, dynamic>?>(
+    (ref) => GenericStateNotifier<Map<String, dynamic>?>(null));
 
 final firestoreInstance = FirebaseFirestore.instance;
-
-TextEditingController addJobTitlechCtrl = TextEditingController();
-TextEditingController resumeIdController = TextEditingController();
-TextEditingController jobTitleController = TextEditingController();
-TextEditingController resumeDescriptionController = TextEditingController();
-TextEditingController resumeController = TextEditingController();
 
 class UserResumePage extends ConsumerWidget {
   String uid = FirebaseAuth.instance.currentUser!.uid;
   String resumeID = '';
 
+  TextEditingController addJobTitlechCtrl = TextEditingController();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final jobTitle = ref.watch(jobTitleProvider).toString();
-    final description = ref.watch(resumeDescriptionProvider).toString();
-    final resume = ref.watch(resumeProvider).toString();
-    resumeID = ref.watch(resumeIdProvider).toString();
-    resumeIdController.text = resumeID;
-    jobTitleController.text = jobTitle;
-    resumeDescriptionController.text = description;
-    resumeController.text = resume;
+    // final jobTitle = ref.watch(jobTitleProvider).toString();
+    // final description = ref.watch(resumeDescriptionProvider).toString();
+    // final resume = ref.watch(resumeProvider).toString();
+    // resumeID = ref.watch(resumeIdProvider).toString();
 
     return Scaffold(
       appBar: MyAppBar.getBar(context, ref),
@@ -78,82 +74,13 @@ class UserResumePage extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: ListView(
-                      children: [
-                        TextField(
-                          // ignore: prefer_const_constructors
-                          decoration: InputDecoration(
-                            hintText: "Job title",
-                            enabledBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 19, 20, 20)),
-                            ),
-                          ),
-                          autocorrect: true,
-                          minLines: 1,
-                          maxLines: 1,
-                          keyboardType: TextInputType.multiline,
-                          style: Theme.of(context).textTheme.headline6,
-                          onChanged: (v) {},
-                          controller: jobTitleController,
-                        ),
-
-                        TextField(
-                          decoration: const InputDecoration(
-                            hintText: "Job Description",
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 19, 20, 20)),
-                            ),
-                          ),
-                          autocorrect: true,
-                          minLines: 3,
-                          maxLines: 3,
-                          keyboardType: TextInputType.multiline,
-                          style: Theme.of(context).textTheme.bodyText2,
-                          onChanged: (v) {},
-                          controller: resumeDescriptionController,
-                        ),
-
-                        TextField(
-                          // ignore: prefer_const_constructors
-                          decoration: InputDecoration(
-                            hintText: "Resume",
-                            // ignore: prefer_const_constructors
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  // width: 3,
-                                  color: Color.fromARGB(255, 19, 20, 20)),
-                            ),
-                          ),
-                          autocorrect: true,
-                          minLines: 34,
-                          maxLines: 34,
-                          scrollPadding: const EdgeInsets.all(20.0),
-                          keyboardType: TextInputType.multiline,
-                          style: Theme.of(context).textTheme.bodyText2,
-                          onChanged: (v) {},
-                          controller: resumeController,
-                        ),
-                        //),
-                      ],
-                    ),
+                    child: ResumeDetails(ref.watch(resumeSNP)),
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      ElevatedButton(
-                          // ignore: prefer_const_constructors
-                          child: Icon(
-                            Icons.edit,
-                            size: 30,
-                          ),
-                          onPressed: () async {
-                            editResume(jobTitle.toString(),
-                                description.toString(), resume.toString());
-                          }),
                       const SizedBox(
                         width: 10,
                       ),
@@ -174,70 +101,70 @@ class UserResumePage extends ConsumerWidget {
       ),
     );
   }
-}
+
+  //Add resume
+  showDialogFunction(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            scrollable: true,
+            title: const Text('Add job title here'),
+            content: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  style: Theme.of(context).textTheme.bodyLarge,
+                  controller: addJobTitlechCtrl,
+                  onChanged: (v) {},
+                )),
+            actions: [
+              TextButton(
+                  child: const Text("Add"),
+                  onPressed: () {
+                    if (addJobTitlechCtrl.text.isEmpty) return;
+                    firestoreInstance
+                        .collection("user")
+                        .doc(uid)
+                        .collection("resume")
+                        .add({
+                      'jobTitle': addJobTitlechCtrl.text,
+                      'timeCreated': FieldValue.serverTimestamp(),
+                      'author': uid,
+                      'lastupdated': null
+                    });
+                    addJobTitlechCtrl.clear();
+                    Navigator.of(context).pop();
+                  }),
+              TextButton(
+                  child: const Text("Cancel"),
+                  onPressed: () {
+                    addJobTitlechCtrl.clear();
+                    Navigator.of(context).pop();
+                  })
+            ],
+          );
+        });
+  }
 
 //Edit resume
-editResume(String jobTitle, String description, String resume) {
-  Resume resumeObject = Resume(
-      jobTitle: jobTitleController.text,
-      description: resumeDescriptionController.text,
-      resume: resumeController.text,
-      lastupdated: Timestamp.now());
+  editResume(String jobTitle, String description, String resume) {
+    // Resume resumeObject = Resume(
+    //     jobTitle: jobTitleController.text,
+    //     description: resumeDescriptionController.text,
+    //     resume: resumeController.text,
+    //     lastupdated: Timestamp.now());
 
-  if (jobTitle == resumeObject.jobTitle &&
-      description == resumeObject.description &&
-      resume == resumeObject.resume) {
-    return;
-  } else {
-    firestoreInstance
-        .collection("user")
-        .doc(uid)
-        .collection('resume')
-        .doc(resumeIdController.text)
-        .update(resumeObject.toMap());
+    // if (jobTitle == resumeObject.jobTitle &&
+    //     description == resumeObject.description &&
+    //     resume == resumeObject.resume) {
+    //   return;
+    // } else {
+    //   firestoreInstance
+    //       .collection("user")
+    //       .doc(uid)
+    //       .collection('resume')
+    //       .doc(resumeIdController.text)
+    //       .update(resumeObject.toMap());
+    // }
   }
-}
-
-//Add resume
-showDialogFunction(BuildContext context) {
-  showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          scrollable: true,
-          title: const Text('Add job title here'),
-          content: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                style: Theme.of(context).textTheme.bodyLarge,
-                controller: addJobTitlechCtrl,
-                onChanged: (v) {},
-              )),
-          actions: [
-            TextButton(
-                child: const Text("Add"),
-                onPressed: () {
-                  if (addJobTitlechCtrl.text.isEmpty) return;
-                  firestoreInstance
-                      .collection("user")
-                      .doc(uid)
-                      .collection("resume")
-                      .add({
-                    'jobTitle': addJobTitlechCtrl.text,
-                    'timeCreated': FieldValue.serverTimestamp(),
-                    'author': uid,
-                    'lastupdated': null
-                  });
-                  addJobTitlechCtrl.clear();
-                  Navigator.of(context).pop();
-                }),
-            TextButton(
-                child: const Text("Cancel"),
-                onPressed: () {
-                  addJobTitlechCtrl.clear();
-                  Navigator.of(context).pop();
-                })
-          ],
-        );
-      });
 }
