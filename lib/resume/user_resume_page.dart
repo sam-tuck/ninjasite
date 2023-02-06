@@ -91,34 +91,6 @@ class UserResumePage extends ConsumerWidget {
                             size: 30,
                           ),
                           onPressed: () async {}),
-                      ElevatedButton(
-                        child: Icon(
-                          Icons.delete,
-                          size: 30,
-                        ),
-                        onPressed: () => showDialog<String>(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: const Text('Confirm'),
-                            content:
-                                Text(resumeDescriptionController as String),
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.pop(context, 'Cancel'),
-                                child: const Text('Cancel'),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  deleteResume();
-                                  Navigator.pop(context, 'OK');
-                                },
-                                child: const Text('OK'),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ],
@@ -173,16 +145,6 @@ class UserResumePage extends ConsumerWidget {
           );
         });
   }
-
-// Delete resume
-deleteResume() {
-  firestoreInstance
-      .collection("user")
-      .doc(uid)
-      .collection("resume")
-      .doc(resumeIdController.text)
-      .delete();
-}
 
 //Edit resume
   editResume(String jobTitle, String description, String resume) {
