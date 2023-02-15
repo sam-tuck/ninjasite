@@ -34,20 +34,17 @@ class UserVacancies extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Row(
-                mainAxisSize: MainAxisSize.max,
+                mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Expanded(
-                      child: TextField(
-                          style: Theme.of(context).textTheme.headline3,
-                          onChanged: (v) {},
-                          controller: searchCtrl)),
+                  TextField(
+                      // ignore: prefer_const_constructors
+                      style: heading,
+                      onChanged: (v) {},
+                      controller: searchCtrl),
                   ElevatedButton(
-                      child: Text(
-                        "Add",
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
+                      child: Text("Add"),
                       onPressed: () async {
                         if (searchCtrl.text.isEmpty) return;
                         print(uid);
@@ -88,3 +85,6 @@ class UserVacancies extends ConsumerWidget {
     }
   }
 }
+
+final heading =
+    TextStyle(fontSize: 10.0, fontWeight: FontWeight.bold, color: Colors.green);

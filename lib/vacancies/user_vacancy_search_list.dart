@@ -20,7 +20,7 @@ class UserVacanciesList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) => ListView(
       padding: EdgeInsets.zero,
       shrinkWrap: true,
-      children: ref.watch(colSP('user/$uid/vacancy')).when(
+      children: ref.watch(colSP('user/$uid/application')).when(
           loading: () => [Container()],
           error: (e, s) => [ErrorWidget(e)],
           // more detailed version:

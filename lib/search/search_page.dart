@@ -29,25 +29,34 @@ class VacanciesPage extends ConsumerWidget {
           ? TheDrawer.buildDrawer(context)
           : null,
       body: Container(
+          margin: EdgeInsets.all(100),
           alignment: Alignment.topLeft,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                mainAxisSize: MainAxisSize.max,
+                mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
                       child: TextField(
-                          style: Theme.of(context).textTheme.headline3,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              filled: true,
+                              fillColor: Colors.white),
+                          style: TextStyle(height: 15 / 10),
                           onChanged: (v) {},
                           controller: searchCtrl)),
+                  SizedBox(
+                    width: 100,
+                  ),
                   ElevatedButton(
                       child: Text(
                         "Add",
-                        style: Theme.of(context).textTheme.headline3,
+                        // style: Theme.of(context).textTheme.headline3,
                       ),
                       onPressed: () async {
                         if (searchCtrl.text.isEmpty) return;
@@ -89,10 +98,23 @@ class VacanciesPage extends ConsumerWidget {
                           'timeCreated': FieldValue.serverTimestamp(),
                           'author': FirebaseAuth.instance.currentUser!.uid,
                         });
+                        var vac = await FirebaseFirestore.instance
+                            .collection(
+                                'user/${FirebaseAuth.instance.currentUser!.uid}/vacancy')
+                            .where('url', isEqualTo: searchCtrl.text)
+                            .get();
+                        FirebaseFirestore.instance
+                            .collection(
+                                'user/${FirebaseAuth.instance.currentUser!.uid}/application')
+                            .add({
+                          'timeCreated': FieldValue.serverTimestamp(),
+                          'vacancy':
+                              'user/${FirebaseAuth.instance.currentUser!.uid}/vacancy/${vac.docs[0].id}'
+                        });
                       })
                 ],
               ),
-              Expanded(child: UserVacanciesList(uid)),
+              UserVacanciesList(uid),
             ],
           )),
     );

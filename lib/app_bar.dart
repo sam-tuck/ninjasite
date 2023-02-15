@@ -19,6 +19,7 @@ class MyAppBar {
 
   static PreferredSizeWidget getBar(BuildContext context, WidgetRef ref) {
     return AppBar(
+      backgroundColor: Colors.white,
       automaticallyImplyLeading:
           (MediaQuery.of(context).size.width < WIDE_SCREEN_WIDTH)
               ? true
@@ -34,6 +35,7 @@ class MyAppBar {
       title: (MediaQuery.of(context).size.width < WIDE_SCREEN_WIDTH)
           ? null
           : Align(
+              alignment: AlignmentDirectional.topStart,
               child: SizedBox(
                   width: 800,
                   child: TabBar(
@@ -53,7 +55,7 @@ class MyAppBar {
                                             // Theme.of(context).brightness == Brightness.light
                                             //     ? Color(DARK_GREY)
                                             //:
-                                            Colors.white))))
+                                            Colors.blue))))
                         .toList(),
                     onTap: (index) {
                       Navigator.of(context).pushNamed(_tabs[index]);
